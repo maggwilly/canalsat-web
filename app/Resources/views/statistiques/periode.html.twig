@@ -10,7 +10,7 @@
                             <!-- BOX -->
                             <div class="box danger"><!-- default, danger, warning, info, success -->
                                 <div class="box-title"><!-- add .noborder class if box-body is removed -->
-            <h4>{% if nombreVisite==0%}<a href="#">Aucune visite réalisé </a>{% else %}<a href="#">{{nombreVisite|number_format(0, ',', '.')}} Visites effectuées</a>{% endif%}</h4>
+            <h4><a href="{{ path('visites') }}">{% if nombreVisite==0%}<a href="#">Aucune visite réalisé </a>{% else %}{{nombreVisite|number_format(0, ',', '.')}} Visites effectuées {% endif%}</a></h4>
             <small class="block"></small>
                                     <i class="fa fa-comments"></i>
                                 </div>
