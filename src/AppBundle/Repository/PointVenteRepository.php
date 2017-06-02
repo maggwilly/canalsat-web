@@ -183,4 +183,38 @@ for mobile
     $statement->execute();
       return  $result = $statement->fetchAll();
   }
+
+  /**
+  *Nombre total de visite effectue par point de vente 
+  */
+  public function visitesPeriode($region=null, $startDate=null, $endDate=null){
+
+       $qb = $this->createQueryBuilder('pv')->leftJoin('pv.visites','v');
+        if($region!=null){
+           $qb->where('pv.ville=:ville') ->setParameter('ville', $region);
+          }
+          if($startDate!=null){
+           $qb->andWhere('v.date>=:startDate')->setParameter('startDate', new \DateTime($startDate));
+          }
+          if($endDate!=null){
+           $qb->andWhere('v.date<=:endDate')->setParameter('endDate',new \DateTime($endDate));
+          }
+         $qb->select('count(v.id) as nombre')
+          ->addSelect('pv.id')
+          ->addSelect('pv.nom')  
+          ->addSelect('pv.matricule')                     
+          ->addSelect('pv.quartier')
+          ->addSelect('count(v.exc) as exc')  
+          ->addSelect('count(v.map) as map')                     
+          ->addSelect('count(v.pre) as pre')
+          ->addSelect('count(v.aff) as aff')  
+          ->addSelect('count(v.rpd) as rpd')                     
+          ->addSelect('count(v.pasClient) as pas_client')          
+          ->groupBy('pv.id')
+          ->addGroupBy('pv.nom')
+          ->addGroupBy('pv.matricule')
+           ->addGroupBy('pv.quartier')
+          ;
+          return $qb->getQuery()->getArrayResult();
+  }  
 }

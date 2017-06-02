@@ -17,21 +17,38 @@ class VisiteController extends Controller
      * Lists all visite entities.
      *
      */
-    public function visitesParPDVAction()
+    public function dernieresVisitesAction($template='all')
     {
         $session = $this->getRequest()->getSession();
-
         $em = $this->getDoctrine()->getManager();
-         $session = $this->getRequest()->getSession();
+        $session = $this->getRequest()->getSession();
         $region=$session->get('region');
         $startDate=$session->get('startDate',date('Y').'-01-01');
-        $endDate=$session->get('endDate', date('Y').'-12-31')
-         ;
-        $visitesParPDV = $em->getRepository('AppBundle:Visite')->visitesParPDVDetaillees($region,$startDate, $endDate);
+        $endDate=$session->get('endDate', date('Y').'-12-31') ;
+        $dernieresVisites = $em->getRepository('AppBundle:Visite')->dernieresVisites($region,$startDate, $endDate);
+       if($template=='all')
+        return $this->render('visite/dernieres.html.twig', array(
+            'visitesParPDV' => $dernieresVisites));
+        return $this->render('visite/details/derniere/'.$template.'.html.twig', array(
+        'visitesParPDV' => $dernieresVisites));
 
-        return $this->render('visite/visitespdv.html.twig', array(
-            'visitesParPDV' => $visitesParPDV
-        ));
+    }
+
+    public function visitesPeriodeAction($template='all')
+    {
+        $session = $this->getRequest()->getSession();
+        $em = $this->getDoctrine()->getManager();
+        $session = $this->getRequest()->getSession();
+        $region=$session->get('region');
+        $startDate=$session->get('startDate',date('Y').'-01-01');
+        $endDate=$session->get('endDate', date('Y').'-12-31') ;
+        $dernieresVisites = $em->getRepository('AppBundle:Visite')->visitesPeriode($region,$startDate, $endDate);
+       if($template=='all')
+        return $this->render('visite/dernieres.html.twig', array(
+            'visitesParPDV' => $dernieresVisites));
+        return $this->render('visite/details/periode/'.$template.'.html.twig', array(
+        'visitesParPDV' => $dernieresVisites));
+
     }
 
 
@@ -42,17 +59,13 @@ class VisiteController extends Controller
     public function visitesAction()
     {
         $session = $this->getRequest()->getSession();
-
         $em = $this->getDoctrine()->getManager();
-         $session = $this->getRequest()->getSession();
+        $session = $this->getRequest()->getSession();
         $region=$session->get('region');
         $startDate=$session->get('startDate',date('Y').'-01-01');
-        $endDate=$session->get('endDate', date('Y').'-12-31')
-         ;
+        $endDate=$session->get('endDate', date('Y').'-12-31');
         $visites = $em->getRepository('AppBundle:Visite')->visites(null,$region,$startDate, $endDate,null);
-        return $this->render('visite/visites.html.twig', array(
-            'visites' => $visites
-        ));
+        return $this->render('visite/visites.html.twig', array('visites' => $visites ));
     }
     /**
      * Finds and displays a visite entity.
@@ -73,7 +86,6 @@ public function boleanToString($boolVal,$id=true,$pasClient=false,$pasOuvert=fal
        return 'NON';
       else
        return '';
-   
 }
 
 public function numberToString($intVal,$id=true){
@@ -85,6 +97,7 @@ public function numberToString($intVal,$id=true){
        return '';
    
 }
+
        public function visitesExcelAction($name=null)
     {
       $em = $this->getDoctrine()->getManager();

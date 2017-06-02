@@ -5,7 +5,6 @@
         <div id="content" class="dashboard padding-20">
                     <!-- BOXES -->
                     <div class="row">
-
                         <!-- Feedback Box -->
                         <div class="col-md-2 col-sm-6">
                             <!-- BOX -->
@@ -19,17 +18,14 @@
                                 </div>
                             </div>
                             <!-- /BOX -->
-
                         </div>
 
                         <!-- Profit Box -->
                         <div class="col-md-2 col-sm-6">
-
                             <!-- BOX -->
                             <div class="box warning"><!-- default, danger, warning, info, success -->
-
                                 <div class="box-title"><!-- add .noborder class if box-body is removed -->
-                                    <h4><a href="{{ path('visites') }}">{{tauxExc|number_format(0, ',', '.')}}%: Exclusivité pour SIAT</a></h4>
+                                    <h4><a href="{{ path('visite_dernieres',{'template':'exclusivite'}) }}">{{tauxExc|number_format(0, ',', '.')}}%: Exclusivité pour SIAT</a></h4>
                          <small class="block">
                          {% if nombrePointVenteVisite==0%}
                          --
@@ -38,30 +34,22 @@
                          {{exc|number_format(0, ',', '.')}} P.D.V ont l'exclusivité
                            {% else %}
                           Aucun pdv n'a l'exclusivité. 
-                           {% endif%}                         
-                          
+                           {% endif%}                                                  
                            {% endif%}
-
                            </small>
                                <i class="fa fa-bar-chart-o"></i>
                                 </div>
-
                                 <div class="box-body text-center">
-
                                 </div>
-
                             </div>
                             <!-- /BOX -->
-
                         </div>
                         <!-- Online Box -->
                         <div class="col-md-2 col-sm-6">
-
                             <!-- BOX -->
                             <div class="box default"><!-- default, danger, warning, info, success -->
-
                                 <div class="box-title"><!-- add .noborder class if box-body is removed -->
-                                    <h4><a href="{{ path('visites') }}">{{tauxAff|number_format(0, ',', '.')}}%:Présence d'affiches</a></h4>
+                                    <h4><a href="{{ path('visite_dernieres',{'template':'affiche'}) }}">{{tauxAff|number_format(0, ',', '.')}}%:Présence d'affiches</a></h4>
                     <small class="block">
                     {% if nombrePointVenteVisite==0%}
                     --
@@ -70,30 +58,22 @@
                           {{nAff |number_format(0, ',', '.')}} P.D.V n'en ont pas.
                            {% else %}
                            Tous les pdv ont des affiches. 
-                           {% endif%}                   
-                    
+                           {% endif%}                                      
                     {% endif%}
                     </small>
-                                    <i class="fa fa-globe"></i>
+                        <i class="fa fa-globe"></i>
                                 </div>
                                 <div class="box-body text-center">
-
                                 </div>
-
                             </div>
                             <!-- /BOX -->
-
                         </div>
-
-
                         <!-- Online Box -->
                         <div class="col-md-2 col-sm-6">
-
                             <!-- BOX -->
                             <div class="box info"><!-- default, danger, warning, info, success -->
-
                                 <div class="box-title"><!-- add .noborder class if box-body is removed -->
-                                    <h4><a href="{{ path('visites') }}">{{tauxMap|number_format(0, ',', '.')}}%: Mise en avant</a></h4>
+                                    <h4><a href="{{ path('visite_dernieres',{'template':'map'}) }}">{{tauxMap|number_format(0, ',', '.')}}%: Mise en avant</a></h4>
                           <small class="block">
                           {% if nombrePointVenteVisite==0%}
                           --
@@ -107,23 +87,17 @@
                             </small>
                                     <i class="fa fa-globe"></i>
                                 </div>
-
                                 <div class="box-body text-center">
-
                                 </div>
-
                             </div>
                             <!-- /BOX -->
-
                         </div>
                         <!-- Online Box -->
                         <div class="col-md-2 col-sm-6">
-
                             <!-- BOX -->
                             <div class="box warning"><!-- default, danger, warning, info, success -->
-
                                 <div class="box-title"><!-- add .noborder class if box-body is removed -->
-                                    <h4><a href="{{ path('visites') }}">{{tauxRpd|number_format(0, ',', '.')}}% : Respect de prix</a></h4>
+                                    <h4><a href="{{ path('visite_dernieres',{'template':'prix'}) }}">{{tauxRpd|number_format(0, ',', '.')}}% : Respect de prix</a></h4>
                           <small class="block">
                           {% if nombrePointVenteVisite==0%}
                           --
@@ -136,11 +110,9 @@
 
                           {% endif%}
                           </small>
-                                    <i class="fa fa-globe"></i>
+                             <i class="fa fa-globe"></i>
                                 </div>
-
                                 <div class="box-body text-center">
-
                                 </div>
                             </div>
                             <!-- /BOX -->
@@ -149,9 +121,8 @@
                         <div class="col-md-2 col-sm-6">
                             <!-- BOX -->
                             <div class="box success"><!-- default, danger, warning, info, success -->
-
                                 <div class="box-title"><!-- add .noborder class if box-body is removed -->
-                                    <h4><a href="{{ path('visites') }}">
+                                    <h4><a href="{{ path('visite_dernieres',{'template':'presence'}) }}">
                                     {{tauxpas_client|number_format(0, ',', '.')}}%: Présence de produits
                                     </a></h4>
                            <small class="block">
@@ -160,20 +131,14 @@
                            {% else %}
                            Tous les pdv vendent. 
                            {% endif%}
-
                            </small>
                                     <i class="fa fa-globe"></i>
                                 </div>
-
                                 <div class="box-body text-center">
-
                                 </div>
-
                             </div>
                             <!-- /BOX -->
-
                         </div>
-
                     </div>
                     <div class="row">
                <div class="col-md-12">
@@ -189,20 +154,14 @@
                                 <li class=""><a href="#" class="opt panel_close" data-confirm-title="Confirm" data-confirm-message="Are you sure you want to remove this panel?" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Close"><i class="fa fa-times"></i></a></li>
                             </ul>
                             <!-- /right options -->
-
                                 </div>
-
                                 <!-- panel content -->
                                 <div class="panel-body">    
-
-
                          <canvas class="chartjs fullwidth height-450" id="barChartCanvas" ></canvas>
                                 </div>
                                 <!-- /panel content -->
-
                             </div>
-                            <!-- /PANEL -->
-                    
+                            <!-- /PANEL -->                 
                         </div>
 
                <div class="col-md-6">

@@ -1,6 +1,11 @@
-visite_par_pdv:
-    path:     /pdv
-    defaults: { _controller: "AppBundle:Visite:visitesParPDV" }
+visite_dernieres:
+    path:     /{template}/dernieres/visite
+    defaults: { _controller: "AppBundle:Visite:dernieresVisites",template:'all' }
+    methods:  GET
+
+visite_periodes:
+    path:     /{template}/periodes/visite
+    defaults: { _controller: "AppBundle:Visite:visitesPeriode",template:'all' }
     methods:  GET
 
 visite_par_pdv_excel:

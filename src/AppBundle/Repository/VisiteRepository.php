@@ -142,6 +142,41 @@ class VisiteRepository extends EntityRepository
   }
 
 
+  /**
+  *Nombre total de visite effectue par point de vente 
+  */
+  public function visitesPeriode($region=null, $startDate=null, $endDate=null){
+
+       $qb = $this->createQueryBuilder('v')->leftJoin('v.pointVente','pv');
+        if($region!=null){
+           $qb->where('pv.ville=:ville') ->setParameter('ville', $region);
+          }
+          if($startDate!=null){
+           $qb->andWhere('v.date>=:startDate')->setParameter('startDate', new \DateTime($startDate));
+          }
+          if($endDate!=null){
+           $qb->andWhere('v.date<=:endDate')->setParameter('endDate',new \DateTime($endDate));
+          }
+
+         $qb->select('count(v.id) as nombre')
+          ->addSelect('pv.id')
+          ->addSelect('pv.nom')  
+          ->addSelect('pv.matricule')                     
+          ->addSelect('pv.quartier')
+          ->addSelect('count(v.exc) as exc')  
+          ->addSelect('count(v.map) as map')                     
+          ->addSelect('count(v.pre) as pre')
+          ->addSelect('count(v.aff) as aff')  
+          ->addSelect('count(v.rpd) as rpd')                     
+          ->addSelect('count(v.pasClient) as pas_client')          
+          ->groupBy('pv.id')
+          ->addGroupBy('pv.nom')
+          ->addGroupBy('pv.matricule')
+           ->addGroupBy('pv.quartier')
+          ;
+          return $qb->getQuery()->getArrayResult();
+  }
+
     /**
   *Nombre total de visite effectue par point de vente 
   */
@@ -167,7 +202,7 @@ class VisiteRepository extends EntityRepository
   */
  
 
-   public function visitesParPDVDetaillees ($region=null, $startDate=null, $endDate=null){
+   public function dernieresVisites ($region=null, $startDate=null, $endDate=null){
     $em = $this->_em;
 
   $RAW_QUERY =($region!=null) ? 'select v.id,v.auditeur,v.matricule, v.nom,v.date,v.map,v.exc,v.pre,v.rpd,v.rpp,v.sapp,v.pas_client,v.raison_pas_client,v.pas_ouvert,v.raison_pas_ouvert,v.commentaire,v.nombre,v.aff ,sum((case when produit=\'FKS\' then stock else 0 end)) as fks,sum((case when produit=\'FKL\' then stock else 0 end)) as fkl,sum((case when produit=\'FMT\' then stock else 0 end)) as fmt,sum((case when produit=\'FKM\' then stock else 0 end)) as fkm,sum((case when produit=\'DUNHIL\' then stock else 0 end)) as dunhil,sum((case when produit=\'L-M\' then stock else 0 end)) as l_m,sum((case when produit=\'MALBORO\' then stock else 0 end)) as malboro,sum((case when produit=\'SUPER MATCH\' then stock else 0 end)) as super_match  from (select v.id,c.nom as auditeur, pv.nom,pv.matricule,v.date, v.map,v.exc,v.pre,v.rpd,v.rpp,v.sapp,v.pas_client,v.raison_pas_client,v.pas_ouvert,v.raison_pas_ouvert,v.commentaire, s.produit_id as produit, s.stock, v.nombre,v.aff from  point_vente pv  left OUTER join  (select  v.id,v.date,v.aff,v.map,v.pre,v.pas_ouvert,v.pas_client,v.raison_pas_ouvert,v.raison_pas_client,v.commentaire, v.exc, v.sapp,v.rpd,v.rpp,v.point_vente_id,v.user_id,u.nombre from (select pv.id as pv ,pv.ville, max(v.date) as date, count(v.id) as nombre from point_vente pv join visite v  on (pv.id=v.point_vente_id and v.date>=:startDate and v.date<=:endDate )  group by  pv.id order by pv.id,pv.ville) as u  join   visite v on (u.pv=v.point_vente_id and u.date=v.date )) v on pv.id=v.point_vente_id left join client c on c.id=v.user_id  left join situation s on s.visite_id=v.id left join produit p on s.produit_id=p.id where pv.ville=:region) v group by v.id, v.nom,v.map,v.exc,v.pre,v.rpd,v.rpp,v.sapp,v.pas_client,v.raison_pas_client,v.pas_ouvert,v.raison_pas_ouvert,v.commentaire,v.aff,v.date,v.auditeur,v.matricule,v.nombre;

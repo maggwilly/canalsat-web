@@ -62,20 +62,19 @@
                                 <li><a href="{{ path('pointvente_map') }}">Geolocalisation</a></li>
                             </ul>
                         </li>
-
                         <li>
                             <a href="#">
                                 <i class="fa fa-menu-arrow pull-right"></i>
-                               <i class="main-icon fa fa-check-square"></i><span>Visite</span>
+                               <i class="main-icon fa fa-check-square"></i><span>Les visites</span>
                             </a>
                             <ul><!-- submenus -->
                                 <li><a href="{{ path('visites') }}">Historique des visites</a></li>
-                                 <li><a href="{{ path('visite_par_pdv') }}">Dernieres vistes</a></li>
+                                 <li><a href="{{ path('visite_dernieres') }}">Les dernieres vistes</a></li>
                             </ul>
                         </li>                                               
                        <li><!-- dashboard -->
                             <a class="dashboard" href="{{ path('etape_index') }}"><!-- warning - url used by default by ajax (if eneabled) -->
-                                <i class="main-icon fa fa-calendar"></i><span>Activités</span>
+                                <i class="main-icon fa fa-calendar"></i><span>Activités des auditeurs</span>
                             </a>
                         </li>                   
                     </ul>
