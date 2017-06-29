@@ -21,6 +21,7 @@ class PointVenteType extends AbstractType
         ->add('type')
         ->add('nomGerant')
         ->add('telGerant')
+        ->add('telgerant')
         ->add('tel')
         ->add('pays')
         ->add('ville')

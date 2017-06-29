@@ -48,6 +48,8 @@ class PointVente
      */
     private $telGerant;
 
+     private $telgerant;
+
     /**
      * @var string
      *
@@ -247,6 +249,29 @@ class PointVente
     {
         return $this->telGerant;
     }
+
+      /**
+     * Set telGerant
+     *
+     * @param string $telGerant
+     * @return PointVente
+     */
+    public function setTelgerant($telGerant)
+    {
+        $this->telGerant = $telGerant;
+
+        return $this;
+    }
+
+    /**
+     * Get telGerant
+     *
+     * @return string 
+     */
+    public function getTelgerant()
+    {
+        return $this->telGerant;
+    }  
     /**
      * Get telGerant
      *
