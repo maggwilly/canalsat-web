@@ -17,4 +17,15 @@ class SecteurRepository extends EntityRepository
 		  $qb = $this->createQueryBuilder('s');
 		  $qb->where('s.id =:id')->setParameter('id',$id)->getQuery()->getSingleResult();
 	}
+
+
+  public function findAllByVille ($region=null){
+  
+       $qb = $this->createQueryBuilder('p');
+        if($region!=null){
+           $qb->where('p.ville=:ville')
+          ->setParameter('ville', $region);
+          }
+         return $qb->getQuery()->getResult();    
+      }
 }

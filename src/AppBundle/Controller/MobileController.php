@@ -44,7 +44,7 @@ class MobileController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $secteurs = $em->getRepository('AppBundle:Secteur')->findByVille($request->get('region'));
+        $secteurs = $em->getRepository('AppBundle:Secteur')->findAllByVille($request->get('region'));
 
         return  $secteurs;
     }
