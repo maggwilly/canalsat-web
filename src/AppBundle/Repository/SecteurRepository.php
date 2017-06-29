@@ -19,7 +19,7 @@ class SecteurRepository extends EntityRepository
 	}
 
 
-  public function findAllByVille ($region=null){
+  public function findSecteursAllByVille ($region=null){
   
        $qb = $this->createQueryBuilder('p');
         if($region!=null){
