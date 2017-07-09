@@ -32,11 +32,12 @@ moyenne ecart de livraison par produit
            $qb->andWhere('v.date<=:endDate')->setParameter('endDate',new \DateTime($endDate));
           }
           
-            $qb->select('v.weekText as weektext'); 
-            $qb->addSelect('sum(s.stock) as stock');
-          
-            $qb->addSelect('count( distinct pv.id) as nombre');
-            $qb->addGroupBy('v.weekText ');
+            $qb->select('v.weekText as weektext')
+            ->addSelect('sum(s.stock) as stock')
+             ->addSelect('v.week')
+            ->addSelect('count( distinct pv.id) as nombre')
+            ->groupBy('v.weekText')
+            ->addGroupBy('v.week')->orderBy('v.week','ASC');
            try {  
           return $qb->getQuery()->getArrayResult();
           } catch (NoResultException $e) {
