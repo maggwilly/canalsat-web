@@ -385,7 +385,7 @@
 
                 
 var data = {
-    labels: [{% for stockSiat in stockSiatParSemaine %}"{{stockSiat.weektext}}:{{stockSiat.nombre}}",{% endfor%}],
+    labels: [{% for stockSiat in stockSiatParSemaine %}"{{stockSiat.weektext}}",{% endfor%}],
     datasets: [
         {
             label: "PART stock SIAT CONGO",
