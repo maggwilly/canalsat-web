@@ -95,12 +95,35 @@ class MobileController extends Controller
             if($failedSynchro!=null) {
               $em->remove($failedSynchro);  
               $em->flush(); 
-            }         
-            $em->persist($entity);
-            $em->flush();
+            }
+        
+        //controle des pos
+        $_pointVentes=new \Doctrine\Common\Collections\ArrayCollection();
+        if($entity->getPointVentes()!=null && !$entity->getPointVentes()->isEmpty()){
+        foreach ($entity->getPointVentes() as  $pointVente) {
+         $_pointVente=$em->getRepository('AppBundle:PointVente')->find($pointVente->getId());
+          if(is_null($_pointVente))
+              $_pointVentes[]=$pointVente;
+          }
+          $entity->setPointVentes($_pointVentes); 
+        }
+
+      //controle des pos
+        $_quartiers=new \Doctrine\Common\Collections\ArrayCollection();
+        if($entity->getQuartiers()!=null && !$entity->getQuartiers()->isEmpty()){
+        foreach ($entity->getQuartiers() as  $quartier) {
+         $_quartier=$em->getRepository('AppBundle:Quartier')->find($quartier->getId());
+          if(is_null($_quartier))
+              $_quartiers[]=$quartier;
+          }
+          $entity->setQuartiers($_quartiers); 
+        }
+    
+
+        $em->persist($entity);
+        $em->flush();
         
         $failedSynchro=$em->getRepository('AppBundle:Synchro')->find($entity->getId());
-
         $form2 = $this->createCreateForm($failedSynchro);
         $form2->submit(array('visites'=>$request->request->all()['visites']),false); // 
          if ($form2->isValid()) {

@@ -36,8 +36,7 @@ moyenne ecart de livraison par produit
             ->addSelect('sum(s.stock) as stock')
              ->addSelect('v.week')
             ->addSelect('count( distinct pv.id) as nombre')
-            ->groupBy('v.weekText')
-            ->addGroupBy('v.week')->orderBy('v.week','ASC');
+            ->groupBy('v.week')->orderBy('v.week','ASC');
            try {  
           return $qb->getQuery()->getArrayResult();
           } catch (NoResultException $e) {
