@@ -111,11 +111,11 @@ class MobileController extends Controller
       //controle des pos
         $_quartiers=new \Doctrine\Common\Collections\ArrayCollection();
         if($entity->getQuartiers()!=null && !$entity->getQuartiers()->isEmpty()){
-        foreach ($entity->getQuartiers() as  $quartier) {
+       /* foreach ($entity->getQuartiers() as  $quartier) {
          $_quartier=$em->getRepository('AppBundle:Quartier')->findOneById($quartier->getId());
           if(is_null($_quartier))
               $_quartiers[]=$quartier;
-          }
+          }*/
           $entity->setQuartiers($_quartiers); 
         }
     
