@@ -101,7 +101,7 @@ class MobileController extends Controller
         $_pointVentes=new \Doctrine\Common\Collections\ArrayCollection();
         if($entity->getPointVentes()!=null && !$entity->getPointVentes()->isEmpty()){
         foreach ($entity->getPointVentes() as  $pointVente) {
-         $_pointVente=$em->getRepository('AppBundle:PointVente')->find($pointVente->getId());
+         $_pointVente=$em->getRepository('AppBundle:PointVente')->findOneById($pointVente->getId());
           if(is_null($_pointVente))
               $_pointVentes[]=$pointVente;
           }
@@ -112,7 +112,7 @@ class MobileController extends Controller
         $_quartiers=new \Doctrine\Common\Collections\ArrayCollection();
         if($entity->getQuartiers()!=null && !$entity->getQuartiers()->isEmpty()){
         foreach ($entity->getQuartiers() as  $quartier) {
-         $_quartier=$em->getRepository('AppBundle:Quartier')->find($quartier->getId());
+         $_quartier=$em->getRepository('AppBundle:Quartier')->findOneById($quartier->getId());
           if(is_null($_quartier))
               $_quartiers[]=$quartier;
           }
