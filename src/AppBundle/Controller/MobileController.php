@@ -127,6 +127,7 @@ class MobileController extends Controller
         $form2 = $this->createCreateForm($failedSynchro);
         $form2->submit(array('visites'=>$request->request->all()['visites']),false); // 
          if ($form2->isValid()) {
+            
             $em->flush();
              return ['success'=>true];
         }else
