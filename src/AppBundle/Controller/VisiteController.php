@@ -145,10 +145,11 @@ public function numberToString($intVal,$id=true){
                ->setCellValue('X1', 'EST-IL CLIENT')
                ->setCellValue('Y1', 'RAISON NON CLIENT')
                ->setCellValue('Z1', 'COMMENTAIRE')
-               ->setCellValue('AB1', 'CREATION')
+               ->setCellValue('AA1', 'CREATION')
                ;
              foreach ($visites as $key => $value) {
                 $date=new \DateTime($value['date']);
+                $created_ad=new \DateTime($value['created_ad']);
                $phpExcelObject->setActiveSheetIndex(0)
                ->setCellValue('A'.($key+2), $value['nom'])
                ->setCellValue('B'.($key+2), $value['matricule'])
@@ -176,7 +177,7 @@ public function numberToString($intVal,$id=true){
                ->setCellValue('X'.($key+2), $this->boleanToString(!$value['pas_client']))
                ->setCellValue('Y'.($key+2), $value['raison_pas_client'])
                ->setCellValue('Z'.($key+2), $value['commentaire'])  
-               ->setCellValue('AB'.($key+2), $value['created_ad'])  ;
+               ->setCellValue('AA'.($key+2), $created_ad->format('M Y'))  ;
            };
         $startDate=new \DateTime($startDate);
         $endDate= new \DateTime($endDate);
@@ -249,10 +250,11 @@ public function numberToString($intVal,$id=true){
                ->setCellValue('X1', 'EST-IL CLIENT')
                ->setCellValue('Y1', 'RAISON NON CLIENT')
                ->setCellValue('Z1', 'COMMENTAIRE')
-               ->setCellValue('AB1', 'CREATION')
+               ->setCellValue('AA1', 'CREATION')
                ;
              foreach ($visites as $key => $value) {
                 $date=new \DateTime($value['date']);
+                 $created_ad=new \DateTime($value['created_ad']);
                $phpExcelObject->setActiveSheetIndex(0)
                ->setCellValue('A'.($key+2), $value['nom'])
                ->setCellValue('B'.($key+2), $value['matricule'])
@@ -280,7 +282,7 @@ public function numberToString($intVal,$id=true){
                ->setCellValue('X'.($key+2), $this->boleanToString(!$value['pas_client']))
                ->setCellValue('Y'.($key+2), $value['raison_pas_client'])
                ->setCellValue('Z'.($key+2), $value['commentaire']) 
-               ->setCellValue('AB'.($key+2), $value['created_ad'])    ;
+               ->setCellValue('AA'.($key+2),  $created_ad->format('M Y'))    ;
            };
         $startDate=new \DateTime($startDate);
         $endDate= new \DateTime($endDate);
