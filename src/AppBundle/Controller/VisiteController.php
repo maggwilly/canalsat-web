@@ -149,7 +149,7 @@ public function numberToString($intVal,$id=true){
                ;
              foreach ($visites as $key => $value) {
                 $date=new \DateTime($value['date']);
-                $created_ad=new \DateTime($value['created_ad']);
+                $created_ad=new \DateTime($value['created_at']);
                $phpExcelObject->setActiveSheetIndex(0)
                ->setCellValue('A'.($key+2), $value['nom'])
                ->setCellValue('B'.($key+2), $value['matricule'])
@@ -254,7 +254,7 @@ public function numberToString($intVal,$id=true){
                ;
              foreach ($visites as $key => $value) {
                 $date=new \DateTime($value['date']);
-                 $created_ad=new \DateTime($value['created_ad']);
+                 $created_ad=new \DateTime($value['created_at']);
                $phpExcelObject->setActiveSheetIndex(0)
                ->setCellValue('A'.($key+2), $value['nom'])
                ->setCellValue('B'.($key+2), $value['matricule'])
