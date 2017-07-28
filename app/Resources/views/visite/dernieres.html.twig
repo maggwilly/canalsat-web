@@ -30,7 +30,8 @@
                                          <th><i class="fa fa-eye"></i></th>                                   
                                             <th>Point de vente</th>
                                             <th>Matricule</th>
-                                            <th>Telephone </th> 
+                                            <th>Création </th> 
+                                            <th>Telephone </th>
                                             <th>Quartier</th>
                                             <th>Adresse</th>
                                             <th>Auditeur</th>
@@ -59,7 +60,10 @@
                                             </td>
                                             <td >
                                              {{visite.matricule}}
-                                            </td> 
+                                            </td>
+                                            <td >
+                                             {{visite.created_at |date('M Y')}}
+                                            </td>      
                                             <td >
                                              {{visite.telgerant}}
                                             </td>
@@ -127,6 +131,9 @@
                             {
                                 "orderable": true,
                             }, 
+                            {
+                                "orderable": true,
+                            },                             
                             {
                                 "orderable": true,
                             },                    
