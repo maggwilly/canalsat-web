@@ -32,6 +32,10 @@
                                          <th><i class="fa fa-eye"></i></th>                                   
                                             <th>Point de vente</th>
                                              <th>Matricule</th>
+                                            <th>Création </th> 
+                                            <th>Telephone </th>
+                                            <th>Quartier</th>
+                                            <th>Adresse</th>                                             
                                             <th>Auditeur</th>
                                             <th>Date </th> 
                                             <th>EXC</th>
@@ -54,6 +58,10 @@
                                             </td>                                        
                                             <td class="col-md-2"> {{visite.pointVente.nom}}</td>
                                              <td > {{visite.pointVente.matricule}}</td>
+                                             <td >{{visite.pointVente.createdAt |date('M Y')}}</td>
+                                             <td >{{visite.pointVente.telGerant}}</td>
+                                             <td >{{visite.pointVente.quartier}}</td>
+                                             <td >{{visite.pointVente.description}}</td>
                                             <td >{{visite.user.nom}}</td>
                                             <td > {{visite.date |date('d/m/Y')}} </td>
                                             <td >{% if visite.exc and not visite.pasClient and not visite.pasOuvert%}Oui{% elseif not visite.pasClient and not visite.pasOuvert %}Non{%else %}--{% endif %}</td>                                           
