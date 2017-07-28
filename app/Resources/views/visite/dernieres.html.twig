@@ -31,7 +31,10 @@
                                             <th>Point de vente</th>
                                             <th>Matricule</th>
                                             <th>Auditeur</th>
-                                            <th>Date </th> 
+                                            <th>Telephone </th> 
+                                            <th>Quartier</th>
+                                            <th>Adresse</th>
+                                            <th>Date </th>                                             
                                             <th>EXC</th>
                                             <th>AFF</th>
                                             <th>MAP</th>
@@ -55,8 +58,14 @@
                                             {{visite.nom}}
                                             </td>
                                             <td >
-                                             {{visite.matricule}}
-                                            </td>                                               
+                                             {{visite.telgerant}}
+                                            </td> 
+                                            <td >
+                                             {{visite.quartier}}
+                                            </td>
+                                            <td >
+                                             {{visite.description}}
+                                            </td>                                                                                          
                                             <td >{% if visite.date %}{{visite.auditeur}}{% else %}Personne n'a visité{% endif %} </td>
                                             <td >{% if visite.date %} {{visite.date |date('d/m/Y')}}{% else %}Aucune visite{% endif %} </td>
                                             <td >{% if visite.exc and visite.id %}Oui{% elseif  visite.id %}Non {% else %}--{% endif %}</td>                                           
