@@ -145,6 +145,7 @@ public function numberToString($intVal,$id=true){
                ->setCellValue('X1', 'EST-IL CLIENT')
                ->setCellValue('Y1', 'RAISON NON CLIENT')
                ->setCellValue('Z1', 'COMMENTAIRE')
+               ->setCellValue('AB1', 'CREATION')
                ;
              foreach ($visites as $key => $value) {
                 $date=new \DateTime($value['date']);
@@ -174,7 +175,8 @@ public function numberToString($intVal,$id=true){
                ->setCellValue('W'.($key+2), $value['raison_pas_ouvert']) 
                ->setCellValue('X'.($key+2), $this->boleanToString(!$value['pas_client']))
                ->setCellValue('Y'.($key+2), $value['raison_pas_client'])
-               ->setCellValue('Z'.($key+2), $value['commentaire'])   ;
+               ->setCellValue('Z'.($key+2), $value['commentaire'])  
+               ->setCellValue('AB'.($key+2), $value['created_ad'])  ;
            };
         $startDate=new \DateTime($startDate);
         $endDate= new \DateTime($endDate);
@@ -247,6 +249,7 @@ public function numberToString($intVal,$id=true){
                ->setCellValue('X1', 'EST-IL CLIENT')
                ->setCellValue('Y1', 'RAISON NON CLIENT')
                ->setCellValue('Z1', 'COMMENTAIRE')
+               ->setCellValue('AB1', 'CREATION')
                ;
              foreach ($visites as $key => $value) {
                 $date=new \DateTime($value['date']);
@@ -276,7 +279,8 @@ public function numberToString($intVal,$id=true){
                ->setCellValue('W'.($key+2), $value['raison_pas_ouvert']) 
                ->setCellValue('X'.($key+2), $this->boleanToString(!$value['pas_client']))
                ->setCellValue('Y'.($key+2), $value['raison_pas_client'])
-               ->setCellValue('Z'.($key+2), $value['commentaire'])   ;
+               ->setCellValue('Z'.($key+2), $value['commentaire']) 
+               ->setCellValue('AB'.($key+2), $value['created_ad'])    ;
            };
         $startDate=new \DateTime($startDate);
         $endDate= new \DateTime($endDate);
