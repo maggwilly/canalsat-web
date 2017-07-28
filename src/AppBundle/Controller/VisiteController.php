@@ -208,7 +208,7 @@ public function numberToString($intVal,$id=true){
       $startDate=$session->get('startDate',date('Y').'-01-01');
       $endDate=$session->get('endDate', date('Y').'-12-31');
       $periode= $session->get('periode',' 01/01 - 31/12/'.date('Y'));
-      $visites = $em->getRepository('AppBundle:Visite')->visitesParPDVDetaillees($region,$startDate, $endDate);
+      $visites = $em->getRepository('AppBundle:Visite')->dernieresVisites($region,$startDate, $endDate);
       
         // ask the service for a Excel5
        $phpExcelObject = $this->get('phpexcel')->createPHPExcelObject();
