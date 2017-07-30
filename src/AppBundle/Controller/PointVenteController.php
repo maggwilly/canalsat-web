@@ -137,7 +137,7 @@ class PointVenteController extends Controller
                ->setCellValue('D'.($key+2), $value['ville'])
                ->setCellValue('E'.($key+2), $value['quartier'])
                ->setCellValue('F'.($key+2), $value['description'])
-               ->setCellValue('G'.($key+2), $value['createdAt']->format('M Y'))
+               ->setCellValue('G'.($key+2), !is_null($value['createdAt'])?$value['createdAt']->format('M Y'):'--')
                ->setCellValue('H'.($key+2), $value['tel']) ;
            };
             $format = 'd/m/Y';
