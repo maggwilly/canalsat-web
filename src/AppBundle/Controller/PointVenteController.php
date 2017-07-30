@@ -87,12 +87,10 @@ class PointVenteController extends Controller
     $em = $this->getDoctrine()->getManager();
       $session = $this->getRequest()->getSession();
       $region=$session->get('region');
-       $startDate=$session->get('startDate',date('Y').'-01-01');
-        $endDate=$session->get('endDate', date('Y').'-12-31');
+      $startDate=$session->get('startDate',date('Y').'-01-01');
+      $endDate=$session->get('endDate', date('Y').'-12-31');
       $pointVentes = $em->getRepository('AppBundle:PointVente')->pointVentes($region,$startDate, $endDate);
-        $nombrePointVente = $em->getRepository('AppBundle:PointVente')->nombrePointVente($region,$startDate, $endDate);
-
-
+      $nombrePointVente = $em->getRepository('AppBundle:PointVente')->nombrePointVente($region,$startDate, $endDate);
         return $this->render('pointvente/map.html.twig', array(
             'pointVentes' => $pointVentes, 
              'nombrePointVente' => $nombrePointVente,
@@ -129,7 +127,7 @@ class PointVenteController extends Controller
              foreach ($pointVentes as $key => $value) {
                 // $startDate= \DateTime::createFromFormat('Y-m-d', $value['createdAt']);
                 $created_at=new \DateTime($value['createdAt']);
-               $phpExcelObject->setActiveSheetIndex(0)
+                $phpExcelObject->setActiveSheetIndex(0)
                ->setCellValue('A'.($key+2), $value['nom'])
                ->setCellValue('B'.($key+2), $value['matricule'])
                ->setCellValue('C'.($key+2), $value['type'])
