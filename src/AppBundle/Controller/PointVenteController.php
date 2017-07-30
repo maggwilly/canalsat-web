@@ -87,10 +87,12 @@ class PointVenteController extends Controller
     $em = $this->getDoctrine()->getManager();
       $session = $this->getRequest()->getSession();
       $region=$session->get('region');
-      $startDate=$session->get('startDate',date('Y').'-01-01');
-      $endDate=$session->get('endDate', date('Y').'-12-31');
+       $startDate=$session->get('startDate',date('Y').'-01-01');
+        $endDate=$session->get('endDate', date('Y').'-12-31');
       $pointVentes = $em->getRepository('AppBundle:PointVente')->pointVentes($region,$startDate, $endDate);
-      $nombrePointVente = $em->getRepository('AppBundle:PointVente')->nombrePointVente($region,$startDate, $endDate);
+        $nombrePointVente = $em->getRepository('AppBundle:PointVente')->nombrePointVente($region,$startDate, $endDate);
+
+
         return $this->render('pointvente/map.html.twig', array(
             'pointVentes' => $pointVentes, 
              'nombrePointVente' => $nombrePointVente,
@@ -126,21 +128,23 @@ class PointVenteController extends Controller
                ->setCellValue('H1', 'TELEPHONE');
              foreach ($pointVentes as $key => $value) {
                 // $startDate= \DateTime::createFromFormat('Y-m-d', $value['createdAt']);
-                $created_at=new \DateTime($value['createdAt']);
-                $phpExcelObject->setActiveSheetIndex(0)
+             //   $created_ad=new \DateTime($value['createdAt']);
+
+               $phpExcelObject->setActiveSheetIndex(0)
                ->setCellValue('A'.($key+2), $value['nom'])
                ->setCellValue('B'.($key+2), $value['matricule'])
                ->setCellValue('C'.($key+2), $value['type'])
                ->setCellValue('D'.($key+2), $value['ville'])
                ->setCellValue('E'.($key+2), $value['quartier'])
                ->setCellValue('F'.($key+2), $value['description'])
-               ->setCellValue('G'.($key+2), $created_at->format('M Y'))
+               ->setCellValue('G'.($key+2), $value['createdAt']->format('M Y'))
                ->setCellValue('H'.($key+2), $value['tel']) ;
            };
             $format = 'd/m/Y';
        $phpExcelObject->getActiveSheet()->setTitle('liste-des-points-de-vente');
        // Set active sheet index to the first sheet, so Excel opens this as the first sheet
        $phpExcelObject->setActiveSheetIndex(0);
+
         // create the writer
         $writer = $this->get('phpexcel')->createWriter($phpExcelObject, 'Excel5');
         // create the response
@@ -154,6 +158,7 @@ class PointVenteController extends Controller
         $response->headers->set('Pragma', 'public');
         $response->headers->set('Cache-Control', 'maxage=1');
         $response->headers->set('Content-Disposition', $dispositionHeader);
+
         return $response;        
     }
 
@@ -179,8 +184,10 @@ public function boleanToString($boolVal){
       $endDate=$session->get('endDate', date('Y').'-12-31');
       $periode= $session->get('periode',' 01/01 - 31/12/'.date('Y'));
       $eligibles = $em->getRepository('AppBundle:PointVente')->eligibles($region,$startDate, $endDate);
+      
         // ask the service for a Excel5
        $phpExcelObject = $this->get('phpexcel')->createPHPExcelObject();
+
        $phpExcelObject->getProperties()->setCreator("AllReport")
            ->setLastModifiedBy("AllReport")
            ->setTitle("Eligibilité ".$region." de ".$periode)
@@ -218,11 +225,13 @@ public function boleanToString($boolVal){
        $phpExcelObject->getActiveSheet()->setTitle('Du '.$startDate->format('d M Y').' au '.$endDate->format('d M Y'));
        // Set active sheet index to the first sheet, so Excel opens this as the first sheet
        $phpExcelObject->setActiveSheetIndex(0);
+
         // create the writer
         $writer = $this->get('phpexcel')->createWriter($phpExcelObject, 'Excel5');
         // create the response
         $response = $this->get('phpexcel')->createStreamedResponse($writer);
         // adding headers
+
         $dispositionHeader = $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
             'eligibilites '.$region.' du '.$startDate->format('d M Y').' au '.$endDate->format('d M Y').'.xls'
@@ -231,6 +240,7 @@ public function boleanToString($boolVal){
         $response->headers->set('Pragma', 'public');
         $response->headers->set('Cache-Control', 'maxage=1');
         $response->headers->set('Content-Disposition', $dispositionHeader);
+
         return $response;        
     } 
 
