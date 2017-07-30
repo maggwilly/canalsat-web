@@ -141,7 +141,6 @@ class PointVenteController extends Controller
        $phpExcelObject->getActiveSheet()->setTitle('liste-des-points-de-vente');
        // Set active sheet index to the first sheet, so Excel opens this as the first sheet
        $phpExcelObject->setActiveSheetIndex(0);
-
         // create the writer
         $writer = $this->get('phpexcel')->createWriter($phpExcelObject, 'Excel5');
         // create the response
@@ -155,7 +154,6 @@ class PointVenteController extends Controller
         $response->headers->set('Pragma', 'public');
         $response->headers->set('Cache-Control', 'maxage=1');
         $response->headers->set('Content-Disposition', $dispositionHeader);
-
         return $response;        
     }
 
@@ -181,10 +179,8 @@ public function boleanToString($boolVal){
       $endDate=$session->get('endDate', date('Y').'-12-31');
       $periode= $session->get('periode',' 01/01 - 31/12/'.date('Y'));
       $eligibles = $em->getRepository('AppBundle:PointVente')->eligibles($region,$startDate, $endDate);
-      
         // ask the service for a Excel5
        $phpExcelObject = $this->get('phpexcel')->createPHPExcelObject();
-
        $phpExcelObject->getProperties()->setCreator("AllReport")
            ->setLastModifiedBy("AllReport")
            ->setTitle("Eligibilité ".$region." de ".$periode)
@@ -222,13 +218,11 @@ public function boleanToString($boolVal){
        $phpExcelObject->getActiveSheet()->setTitle('Du '.$startDate->format('d M Y').' au '.$endDate->format('d M Y'));
        // Set active sheet index to the first sheet, so Excel opens this as the first sheet
        $phpExcelObject->setActiveSheetIndex(0);
-
         // create the writer
         $writer = $this->get('phpexcel')->createWriter($phpExcelObject, 'Excel5');
         // create the response
         $response = $this->get('phpexcel')->createStreamedResponse($writer);
         // adding headers
-
         $dispositionHeader = $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
             'eligibilites '.$region.' du '.$startDate->format('d M Y').' au '.$endDate->format('d M Y').'.xls'
@@ -237,7 +231,6 @@ public function boleanToString($boolVal){
         $response->headers->set('Pragma', 'public');
         $response->headers->set('Cache-Control', 'maxage=1');
         $response->headers->set('Content-Disposition', $dispositionHeader);
-
         return $response;        
     } 
 
