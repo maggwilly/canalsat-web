@@ -108,10 +108,8 @@ class PointVenteController extends Controller
       $endDate=$session->get('endDate', date('Y').'-12-31');
       $periode= $session->get('periode');
       $pointVentes = $em->getRepository('AppBundle:PointVente')->pointVentes($region,$startDate, $endDate);
-      
         // ask the service for a Excel5
        $phpExcelObject = $this->get('phpexcel')->createPHPExcelObject();
-
        $phpExcelObject->getProperties()->setCreator("AllReport")
            ->setLastModifiedBy("AllReport")
            ->setTitle("Liste des points de vente")
@@ -130,6 +128,7 @@ class PointVenteController extends Controller
                ->setCellValue('H1', 'TELEPHONE');
              foreach ($pointVentes as $key => $value) {
                 // $startDate= \DateTime::createFromFormat('Y-m-d', $value['createdAt']);
+                $created_at=new \DateTime($value['createdAt']);
                $phpExcelObject->setActiveSheetIndex(0)
                ->setCellValue('A'.($key+2), $value['nom'])
                ->setCellValue('B'.($key+2), $value['matricule'])
@@ -137,7 +136,7 @@ class PointVenteController extends Controller
                ->setCellValue('D'.($key+2), $value['ville'])
                ->setCellValue('E'.($key+2), $value['quartier'])
                ->setCellValue('F'.($key+2), $value['description'])
-               ->setCellValue('G'.($key+2), $value['createdAt']->format('M Y'))
+               ->setCellValue('G'.($key+2), $created_at->format('M Y'))
                ->setCellValue('H'.($key+2), $value['tel']) ;
            };
             $format = 'd/m/Y';
