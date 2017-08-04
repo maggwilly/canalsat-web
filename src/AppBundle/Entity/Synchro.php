@@ -42,13 +42,13 @@ class Synchro
      */
     protected $user;
    /**
-   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Visite", mappedBy="synchro", cascade={"persist","remove"})
+   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Visite", mappedBy="synchro", cascade={"remove"})
    *@ORM\OrderBy({"date" = "DESC"})
    */
     private $visites;
 
     /**
-   * @ORM\OneToMany(targetEntity="AppBundle\Entity\PointVente", mappedBy="synchro", cascade={"persist","remove"})
+   * @ORM\OneToMany(targetEntity="AppBundle\Entity\PointVente", mappedBy="synchro", cascade={"remove"})
    *@ORM\OrderBy({"date" = "DESC"})
    */
     private $pointVentes;
