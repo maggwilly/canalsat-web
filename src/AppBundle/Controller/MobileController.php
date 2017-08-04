@@ -102,10 +102,11 @@ class MobileController extends Controller
         if($entity->getPointVentes()!=null && !$entity->getPointVentes()->isEmpty()){
         foreach ($entity->getPointVentes() as  $pointVente) {
          $_pointVente=$em->getRepository('AppBundle:PointVente')->findOneById($pointVente->getId());
-          if(is_null($_pointVente))
+          if(is_null($_pointVente)){
             $_pointVentes[]=$pointVente;
             $em->persist($pointVente);
             $em->flush();
+            }
           }
         //  $entity->setPointVentes($_pointVentes); 
         }
