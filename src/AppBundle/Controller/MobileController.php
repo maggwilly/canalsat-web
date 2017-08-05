@@ -106,7 +106,7 @@ class MobileController extends Controller
           if(is_null($_pointVente)){
             //$_pointVentes[]=$pointVente;
             $em->persist($pointVente);
-            $em->flush($pointVente);
+            $em->flush();
             }
           }
          $entity->setPointVentes($_pointVentes); 
@@ -126,13 +126,13 @@ class MobileController extends Controller
         $em->flush();  
 
         $_visites=new \Doctrine\Common\Collections\ArrayCollection(); 
-        $failedSynchro=$em->getRepository('AppBundle:Synchro')->find($entity->getId());
+        $failedSynchro=new Synchro(null,new \DateTime()); //$em->getRepository('AppBundle:Synchro')->find($entity->getId());
         $form2 = $this->createCreateForm($failedSynchro);
         $form2->submit(array('visites'=>$request->request->all()['visites']),false); // 
         if ($form2->isValid()) {
         foreach ($failedSynchro->getVisites() as  $visite) {
         $em->persist($visite);
-        $em->flush($visite);
+        $em->flush();
           }
          $failedSynchro->setVisites($_visites); 
         //$em->flush();
