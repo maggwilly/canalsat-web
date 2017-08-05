@@ -134,7 +134,7 @@ class MobileController extends Controller
         $em->persist($visite);
         $em->flush();
           }
-         $failedSynchro->setVisites($_visites); 
+       //  $failedSynchro->setVisites($_visites); 
         //$em->flush();
              return ['success'=>true];
         }else
