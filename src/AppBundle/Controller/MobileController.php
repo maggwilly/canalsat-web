@@ -133,13 +133,16 @@ class MobileController extends Controller
         $form2 = $this->createCreateForm($failedSynchro);
         $form2->submit(array('visites'=>$request->request->all()['visites']),false); // 
         if ($form2->isValid()) {
-        $encoders = array(new XmlEncoder(), new JsonEncoder());
+
+     /*   $encoders = array(new XmlEncoder(), new JsonEncoder());
        $normalizers = array(new ObjectNormalizer());
        $serializer = new Serializer($normalizers, $encoders);
        $jsonContent = $serializer->serialize($failedSynchro, 'json'); 
         $fp = fopen(__DIR__.'/../../../web/olivier.json', 'w');
         fwrite($fp,   $jsonContent);
-        fclose($fp);        
+        fclose($fp);   
+*/
+
         foreach ($failedSynchro->getVisites() as  $visite) {
              $em->persist($visite);
              $em->flush();
