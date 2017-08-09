@@ -99,6 +99,7 @@ class MobileController extends Controller
             if($failedSynchro!=null) {
               $em->remove($failedSynchro);  
               $em->flush(); 
+              $em->clear();
             } 
 
         //controle des pos
@@ -110,6 +111,7 @@ class MobileController extends Controller
             //$_pointVentes[]=$pointVente;
             $em->persist($pointVente);
             $em->flush();
+            $em->clear();
             }
           }
          $entity->setPointVentes($_pointVentes); 
@@ -125,8 +127,9 @@ class MobileController extends Controller
           }*/
           $entity->setQuartiers($_quartiers); 
         }
-       // $em->persist($entity);
-        //$em->flush();  
+        $em->persist($entity);
+        $em->flush(); 
+        $em->clear(); 
 
         $_visites=new \Doctrine\Common\Collections\ArrayCollection(); 
         $failedSynchro=new Synchro(null,new \DateTime()); //$em->getRepository('AppBundle:Synchro')->find($entity->getId());
@@ -146,6 +149,7 @@ class MobileController extends Controller
         foreach ($failedSynchro->getVisites() as  $visite) {
              $em->persist($visite);
              $em->flush();
+             $em->clear();
           }
        //  $failedSynchro->setVisites($_visites); 
         //$em->flush();
