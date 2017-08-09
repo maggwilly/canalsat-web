@@ -93,7 +93,7 @@ class Situation
 
     /**
    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Visite",inversedBy="situations")
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
    */
   
     private $visite;
