@@ -221,6 +221,9 @@ class Visite
     $date->modify('+6 days');
     $endDate=$date->format('d/m/Y');
     $this->weekText=$startDate.' - '.$endDate;
+    foreach ($this->situations as $key => $situation) {
+         $situation->setVisite($this);
+    }
   }
     /**
      * Set map
