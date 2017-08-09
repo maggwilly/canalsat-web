@@ -7,6 +7,8 @@ use FOS\RestBundle\Controller\Annotations as Rest; // alias pour toutes les anno
 use FOS\RestBundle\View\View; // Utilisation de la vue de FOSRestBundle
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Synchro;
+use AppBundle\Entity\Visite;
+use AppBundle\Form\VisiteType;
 use AppBundle\Form\SynchroType;
 use AppBundle\Form\EtapeType;
 use AppBundle\Form\PointVenteType;
@@ -134,7 +136,19 @@ class MobileController extends Controller
         $_visites=new \Doctrine\Common\Collections\ArrayCollection(); 
         $failedSynchro=new Synchro(null,new \DateTime()); //$em->getRepository('AppBundle:Synchro')->find($entity->getId());
         $form2 = $this->createCreateForm($failedSynchro);
-        
+
+       
+        foreach ($request->request->all()['visites'] as $key => $visiteData) {
+            $visite=new Visite();
+           $form = $this->createVisiteForm($visite);
+           $form->submit($visiteData,false); // 
+           if($form->isValid()){
+             $em->persist($visite);
+             $em->flush();
+             $em->clear();
+           }
+        }
+
         $fp = fopen(__DIR__.'/../../../web/olivier.json', 'w');
         fwrite($fp,   $request->request->all()['visites']);
         fclose($fp);  
@@ -153,6 +167,18 @@ class MobileController extends Controller
           return $form2;
          }
         return  $form;
+    }
+
+
+    /**
+     * Creates a form to create a Produit entity.
+     * @param Produit $entity The entity
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createVisiteForm(Visite $entity)
+    {
+        $form = $this->createForm(VisiteType::class, $entity);
+        return $form;
     }
 
      /** Creates a new Produit entity.
@@ -203,6 +229,9 @@ class MobileController extends Controller
         $form = $this->createForm(SynchroType::class, $entity);
         return $form;
     }
+
+
+
 
 private function getConnectedUser(){
     return $this->get('security.token_storage')->getToken()->getUser();
