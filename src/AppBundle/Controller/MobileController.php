@@ -141,8 +141,6 @@ class MobileController extends Controller
          
         $form2->submit(array('visites'=>$request->request->all()['visites']),false); // 
         if ($form2->isValid()) {
-
-
         foreach ($failedSynchro->getVisites() as  $visite) {
              $em->persist($visite);
              $em->flush();
