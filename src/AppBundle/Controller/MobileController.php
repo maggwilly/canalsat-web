@@ -133,12 +133,9 @@ class MobileController extends Controller
         $em->flush(); 
         $em->clear(); 
 
-        $_visites=new \Doctrine\Common\Collections\ArrayCollection(); 
-        $failedSynchro=new Synchro(null,new \DateTime()); //$em->getRepository('AppBundle:Synchro')->find($entity->getId());
-        $form2 = $this->createCreateForm($failedSynchro);
 
        
-        foreach ($request->request->all()['visites'] as $key => $visiteData) {
+      /*  foreach ($request->request->all()['visites'] as $key => $visiteData) {
             $visite=new Visite();
            $form = $this->createVisiteForm($visite);
            $form->submit($visiteData,false); // 
@@ -147,12 +144,16 @@ class MobileController extends Controller
              $em->flush();
              $em->clear();
            }
-        }
+        }*/
 
-        $fp = fopen(__DIR__.'/../../../web/olivier.json', 'w');
+       /* $fp = fopen(__DIR__.'/../../../web/olivier.json', 'w');
         fwrite($fp,   $request->request->all()['visites']);
         fclose($fp);  
-         
+
+         $_visites=new \Doctrine\Common\Collections\ArrayCollection(); 
+        $failedSynchro=new Synchro(null,new \DateTime()); //$em->getRepository('AppBundle:Synchro')->find($entity->getId());
+        $form2 = $this->createCreateForm($failedSynchro);
+        
         $form2->submit(array('visites'=>$request->request->all()['visites']),false); // 
         if ($form2->isValid()) {
         foreach ($failedSynchro->getVisites() as  $visite) {
@@ -162,6 +163,7 @@ class MobileController extends Controller
           }
        //  $failedSynchro->setVisites($_visites); 
         //$em->flush();
+        */
              return ['success'=>true];
         }else
           return $form2;
