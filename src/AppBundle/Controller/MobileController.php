@@ -138,7 +138,7 @@ class MobileController extends Controller
         $form2 = $this->createCreateForm($failedSynchro);
 
        
-       /* foreach ($request->request->all()['visites'] as $key => $visiteData) {
+        foreach ($request->request->all()['visites'] as $key => $visiteData) {
             $visite=new Visite();
            $form = $this->createVisiteForm($visite);
            $form->submit($visiteData,false); // 
@@ -147,7 +147,7 @@ class MobileController extends Controller
              $em->flush();
              $em->clear();
            }
-        }*/
+        }
 
       /*  $fp = fopen(__DIR__.'/../../../web/olivier.json', 'w');
         fwrite($fp,   $request->request->all()['visites']);
