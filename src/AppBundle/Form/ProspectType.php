@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-class SituationType extends AbstractType
+class ProspectType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -14,16 +14,19 @@ class SituationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('map')
-        ->add('pre')
-        ->add('aff')
-        ->add('rpp')
-        ->add('rpd')
-        ->add('stock')
-        ->add('stockG')
-        ->add('mvj')
-        ->add('ecl')
-        ->add('produit', EntityType::class, array('class' => 'AppBundle:Produit'));
+        ->add('nom')
+        ->add('telephone')
+        ->add('sociopro')
+        ->add('categorie')
+        ->add('type')
+        ->add('nbpersonnes')
+        ->add('nbjeunes')
+        ->add('quartier')
+        ->add('preference')
+        ->add('raison')
+        ->add('modepaiement') 
+        //->add('user', EntityType::class, array('class' => 'AppBundle:Client'))    
+            ;       
     }
     
     /**
@@ -32,8 +35,8 @@ class SituationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Situation',
-           'csrf_protection' => false,
+            'data_class' => 'AppBundle\Entity\Prospect',
+            'csrf_protection' => false,
             'allow_extra_fields' => true
         ));
     }
@@ -43,7 +46,7 @@ class SituationType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_situation';
+        return 'appbundle_prospect';
     }
 
 

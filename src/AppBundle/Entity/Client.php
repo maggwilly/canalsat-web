@@ -60,20 +60,10 @@ class Client extends BaseUser
    * @ORM\OneToMany(targetEntity="AppBundle\Entity\Visite", mappedBy="user", cascade={"persist","remove"})
    *@ORM\OrderBy({"date" = "DESC"})
    */
-    private $visites;
-
-   /**
-   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Synchro", mappedBy="user", cascade={"persist","remove"})
-   *@ORM\OrderBy({"date" = "DESC"})
-   */
-    private $synchros;
+    //private $visites;
 
 
-       /**
-   * @ORM\OneToMany(targetEntity="AppBundle\Entity\Etape", mappedBy="user", cascade={"persist","remove"})
-   *@ORM\OrderBy({"date" = "DESC"})
-   */
-    private $etapes;
+
      /**
      * @var string
      *

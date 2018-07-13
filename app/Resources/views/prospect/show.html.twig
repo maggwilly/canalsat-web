@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Prospect</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ prospect.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ prospect.nom }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ prospect.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Sociopro</th>
+                <td>{{ prospect.sociopro }}</td>
+            </tr>
+            <tr>
+                <th>Categorie</th>
+                <td>{{ prospect.categorie }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ prospect.type }}</td>
+            </tr>
+            <tr>
+                <th>Nbpersonnes</th>
+                <td>{{ prospect.nbpersonnes }}</td>
+            </tr>
+            <tr>
+                <th>Nbjeunes</th>
+                <td>{{ prospect.nbjeunes }}</td>
+            </tr>
+            <tr>
+                <th>Quartier</th>
+                <td>{{ prospect.quartier }}</td>
+            </tr>
+            <tr>
+                <th>Preference</th>
+                <td>{{ prospect.preference }}</td>
+            </tr>
+            <tr>
+                <th>Raison</th>
+                <td>{{ prospect.raison }}</td>
+            </tr>
+            <tr>
+                <th>Modepaiement</th>
+                <td>{{ prospect.modepaiement }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('prospect_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('prospect_edit', { 'id': prospect.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

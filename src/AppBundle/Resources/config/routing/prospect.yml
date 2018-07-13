@@ -1,0 +1,24 @@
+prospect_index:
+    path:     /
+    defaults: { _controller: "AppBundle:Prospect:index" }
+    methods:  GET
+
+prospect_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:Prospect:show" }
+    methods:  GET
+
+prospect_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Prospect:new" }
+    methods:  [GET, POST]
+
+prospect_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Prospect:edit" }
+    methods:  [GET, POST]
+
+prospect_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Prospect:delete" }
+    methods:  DELETE
